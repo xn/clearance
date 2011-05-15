@@ -19,4 +19,3 @@ end
 
 desc "Default: run the specs and cucumber features"
 task :default => [:spec, :cucumber]
-

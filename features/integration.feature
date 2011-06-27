@@ -1,10 +1,8 @@
-@disable-bundler
 Feature: integrate with application
 
   Background:
-    When I successfully run "bundle exec rails new testapp"
+    When I successfully run `bundle exec rails new testapp`
     And I cd to "testapp"
-    And I copy the locked Gemfile from this project
     And I remove the file "public/index.html"
     And I remove the file "app/views/layouts/application.html.erb"
     And I configure ActionMailer to use "localhost" as a host
@@ -13,20 +11,20 @@ Feature: integrate with application
     And I add the "capybara" gem
     And I add the "rspec-rails" gem
     And I add the "factory_girl_rails" gem
-    And I add the "dynamic_form" gem
     And I add the "database_cleaner" gem
     And I add the "clearance" gem from this project
-    And I add the "diesel" gem
-    And I run "bundle install --local"
-    And I successfully run "bundle exec rails generate cucumber:install"
+    And I add the "diesel" gem from git "git://github.com/thoughtbot/diesel.git" on branch "rails-3-1"
+    And I reset Bundler environment variable
+    And I run `bundle install --local`
+    And I successfully run `bundle exec rails generate cucumber:install`
     And I disable Capybara Javascript emulation
-    And I successfully run "bundle exec rails generate clearance:features"
+    And I successfully run `bundle exec rails generate clearance:features`
 
   Scenario: generate a Rails app, run the generators, and run the tests
-    When I successfully run "bundle exec rails generate clearance:install"
+    When I successfully run `bundle exec rails generate clearance:install`
     Then the output should contain "Next steps"
-    When I successfully run "bundle exec rake db:migrate --trace"
-    And I successfully run "bundle exec rake --trace"
+    When I successfully run `bundle exec rake db:migrate --trace`
+    And I successfully run `bundle exec rake --trace`
     Then the output should contain "passed"
     And the output should not contain "failed"
     And the output should not contain "Could not find generator"
@@ -45,10 +43,10 @@ Feature: integrate with application
       end
     end
     """
-    And I successfully run "bundle exec rake db:migrate --trace"
-    And I successfully run "bundle exec rails generate clearance:install"
-    And I successfully run "bundle exec rake db:migrate --trace"
-    And I successfully run "bundle exec rake --trace"
+    And I successfully run `bundle exec rake db:migrate --trace`
+    And I successfully run `bundle exec rails generate clearance:install`
+    And I successfully run `bundle exec rake db:migrate --trace`
+    And I successfully run `bundle exec rake --trace`
     Then the output should contain "passed"
     And the output should not contain "failed"
     And the output should not contain "Could not find generator"

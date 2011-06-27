@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Clearance::PasswordsController do
-  include Shoulda::ActionMailer::Matchers
+  include Shoulda::Matchers::ActionMailer
 
   it { should route(:get, '/users/1/password/edit').
                 to(:controller => 'clearance/passwords', :action  => 'edit', :user_id => '1') }
@@ -87,7 +87,7 @@ describe Clearance::PasswordsController do
         get :edit, :user_id => @user.to_param, :token => ""
       end
 
-      it { should set_the_flash.to(/double check the URL/i) }
+      it { should set_the_flash.to(/double check the URL/i).now }
       it { should render_template(:new) }
     end
 
@@ -96,7 +96,7 @@ describe Clearance::PasswordsController do
         get :edit, :user_id => @user.to_param
       end
 
-      it { should set_the_flash.to(/double check the URL/i) }
+      it { should set_the_flash.to(/double check the URL/i).now }
       it { should render_template(:new) }
     end
 
@@ -154,7 +154,7 @@ describe Clearance::PasswordsController do
         cookies[:remember_token].should be_nil
       end
 
-      it { should set_the_flash.to(/password can't be blank/i) }
+      it { should set_the_flash.to(/password can't be blank/i).now }
       it { should respond_with(:success) }
       it { should render_template(:edit) }
     end

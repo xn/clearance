@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency('rails',  '>= 3.0')
   #s.add_dependency('diesel', '~> 0.1.4.pre')
-
+  s.add_dependency('diesel', '~> 0.1.4')
   s.add_development_dependency('bundler', '~> 1.0.0')
 
   if s.respond_to? :specification_version then
